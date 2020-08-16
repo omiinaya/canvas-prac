@@ -27,10 +27,13 @@ function showAxis() {
 
         canvas2.addEventListener("mousemove", function (event) {
             bounds = canvas2.getBoundingClientRect();
-            currentPos = pointerPos(canvas, event)
+            currentPos = coordinates(event)
 
-            //console.log(bounds.left+","+ bounds.top+","+bounds.right+","+bounds.bottom);
-            drawText(currentPos, "30", 50, 50);
+            x = posX(event);
+            y = posY(event);
+            s = "15";
+
+            drawText(currentPos, s, x, y);
 
         })
 
@@ -38,10 +41,19 @@ function showAxis() {
 
 }
 
-function pointerPos(canvas, e) {
-    var pos = { x: e.clientX - bounds.left, y: e.clientY - bounds.top };
-    var coordinates = "x: " + pos.x + ", y: " + pos.y;
-    return coordinates;
+function coordinates(e) {
+    var i = "x: " + posX(e) + ", y: " + posY(e);
+    return i;
+}
+
+function posX(e) {
+    var pos = { x: e.clientX - bounds.left };
+    return pos.x;
+}
+
+function posY(e) {
+    var pos = { y: e.clientY - bounds.top };
+    return pos.y;
 }
 
 //writes text(a) with dont size(s) at coordiantes (x,y)
