@@ -4,8 +4,11 @@ var canvas2;
 var context2;
 var bounds;
 
+let clientWidth = window.innerWidth;
+let clientHeight = window.innerHeight;
+
 document.addEventListener('DOMContentLoaded', function (event) {
-    
+
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
 
@@ -20,6 +23,19 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     showAxis();
 })
+
+window.onresize = function()
+{
+    context.canvas.width = window.innerWidth / 2;
+    context.canvas.height = window.innerHeight / 2;
+    context2.canvas.width = context.canvas.width;
+    context2.canvas.height = context.canvas.height;
+}
+
+function getClientDimensions() {
+    x = "Width: " + getClientWidth() + ", Height: " + getClientHeight();
+    return x;
+}
 
 function showAxis() {
 
@@ -58,10 +74,15 @@ function posY(e) {
     return axis.y;
 }
 
+function coordinates(e) {
+    var i = "x: " + posX(e) + ", y: " + posY(e);
+    return i;
+}
+
 //writes text(a) with dont size(s) at coordiantes (x,y)
-function drawText(a, s,  x, y) {
+function drawText(a, s, x, y) {
     context2.clearRect(0, 0, window.innerWidth, window.innerHeight)
-    context2.font = s+"px Arial";
+    context2.font = s + "px Arial";
     currentText = a, x, y;
     context2.fillText(a, x, y);
 }
