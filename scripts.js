@@ -26,6 +26,7 @@ function showAxis() {
     canvas2.addEventListener("mouseenter", function (e) {
 
         canvas2.addEventListener("mousemove", function (event) {
+
             bounds = canvas2.getBoundingClientRect();
             currentPos = coordinates(event)
 
@@ -37,23 +38,24 @@ function showAxis() {
 
         })
 
+        canvas2.addEventListener("mouseleave", function (e) {
+
+            context2.clearRect(0, 0, window.innerWidth, window.innerHeight)
+
+        })
+
     })
 
 }
 
-function coordinates(e) {
-    var i = "x: " + posX(e) + ", y: " + posY(e);
-    return i;
-}
-
 function posX(e) {
-    var pos = { x: e.clientX - bounds.left };
-    return pos.x;
+    var axis = { x: e.clientX - bounds.left };
+    return axis.x;
 }
 
 function posY(e) {
-    var pos = { y: e.clientY - bounds.top };
-    return pos.y;
+    var axis = { y: e.clientY - bounds.top };
+    return axis.y;
 }
 
 //writes text(a) with dont size(s) at coordiantes (x,y)
